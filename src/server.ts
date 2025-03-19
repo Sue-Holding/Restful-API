@@ -14,7 +14,9 @@ const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
-app.use(cors());
+app.use(cors(
+    {origin: "http://127.0.0.1:5500"}
+));
 app.use(express.urlencoded({extended: true}));
 
 app.use(express.json()); // ✅ Middleware to parse JSON body
