@@ -23,7 +23,7 @@ app.use(express.json()); // ✅ Middleware to parse JSON body
 
 app.use(
   session({
-    secret: "supersecret", // Change this in production
+    secret: process.env.SESSION_SECRET || "fallbackSecret",
     resave: false,
     saveUninitialized: true,
     cookie: { secure: false }, // Set to true if using HTTPS
