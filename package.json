@@ -4,7 +4,7 @@
   "main": "app.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node dist/server.js",
+    "start": "node build/server.js",
     "dev": "nodemon src/server.ts",
     "build": "npx tsc",
     "test": "jest",
