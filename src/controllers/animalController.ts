@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-export const getAnimals = async (req: Request, res: Response) => {
+export const getAllAnimals = async (req: Request, res: Response) => {
   try {
     const animals = await Animal.find();
     res.json(animals);
@@ -14,6 +14,24 @@ export const getAnimals = async (req: Request, res: Response) => {
     }
   }
 };
+
+export const getAnimalById = async (req: Request, res: Response) => {
+  try {
+    const animal = await Animal.findById(req.params.id);
+
+    if (!animal) {
+      res.status(404).json({ message: `No animal found with this ID: ${req.params.id}` });
+      return;
+    }
+
+    res.json(animal);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      res.status(500).json({ message: "Server Error", error: err.message });
+    }
+  }
+};
+
 
 export const addAnimal = async (req: Request, res: Response) => {
   try {
@@ -153,4 +171,4 @@ export const checkAnimalGuess = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = { getAnimals, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, guessAnimalByFunFact, checkAnimalGuess };
+module.exports = { getAllAnimals, getAnimalById, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, guessAnimalByFunFact, checkAnimalGuess };
