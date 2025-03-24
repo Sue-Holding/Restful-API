@@ -2,6 +2,7 @@
 
 This is a RESTful API for managing animal data. It provides CRUD functionality to create, read, update, and delete animal records.
 Users must log in to interact with the API. I have added authMiddleware which will prevent access to the routes without a succesful log in session, but no password in required.
+
 The data is stored in MongoDB and includes details such as name, diet, habitat, diet and a fun fact related to the animal.
 It is aimed for toddler learning so it uses simple facts stored in the database.
 
@@ -10,24 +11,29 @@ It is aimed for toddler learning so it uses simple facts stored in the database.
 The API uses the following data models for **animals** and **users**.
 Only name is required for both models.
 
+### Animal Schema
+
 ```
-const animalSchema 
+const animalSchema = {
   name: {
     type: String,
     required: true,
   },
-  
   diet: String,
   habitat: String,
   funFact: String,
-
+};
 ```
 
+### User Schema
+
 ```
-const userSchema
- {
-    name: { type: String, required: true },
+const userSchema = {
+  name: { 
+    type: String, 
+    required: true 
   },
+},
 ```
 
 ## 2. Resource URIs
@@ -50,9 +56,7 @@ const userSchema
 
 ## 3. Resource Representations
 
-### JSON Representation
-
-**Animal**
+### Example: Animal JSON Representation
 
 ```
 { 
@@ -66,20 +70,23 @@ const userSchema
 }
 ```
 
-**User**
+### Example: User JSON Representation
+
 ```
 {
-	"message": "Welcome, Sue! Let's learn about animals!"
+ "message": "Welcome, Sue! Let's learn about animals!"
 }
 ```
 
 ```
 {
-	"message": " Sue Logged out successfully "
+ "message": " Sue Logged out successfully "
 }
 ```
 
 ## 4. HTTP Methods
+
+Base URL: `https://restful-api-animals.onrender.com`
 
 | Method    |   Endpoint                        |   Description                    |
 |-----------|-----------------------------------|----------------------------------|
@@ -97,15 +104,15 @@ const userSchema
 | GET       | `/api/animals/game/guess-funfact` | Game to guess animal by fun fact |
 | POST      | `/api/animals/game/check-guess`   | Check the fun fact guess game    |
 
-### Getting Started
+## 5. Getting Started
 
-#### Prerequisites
+### Prerequisites
 
 - Node.js
 - MongoDB
 - npm
 
-#### Installation
+### Installation
 
 1. Clone the repository:
 
@@ -121,20 +128,103 @@ const userSchema
 
 - npm run dev
 
-#### Testing
+## 6. Testing
 
-This application can be tested with Insomnia with the HTTP Methods above as well as using cURL commands
-- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Jo"}' -c cookies.txt http://localhost:3000/api/users/create` To create a user
-- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Sue"}' -c cookies.txt http://localhost:3000/api/users/login` To log-in
-- `curl -X POST -H "Content-Type: application/json" -b cookies.txt -c cookies.txt http://localhost:3000/api/users/logout` To log-out
-- `curl -X GET -b cookies.txt http://localhost:3000/api/animals/getall` To view all animals
-- `curl -X GET -b cookies.txt http://localhost:3000/api/animals/get/:id` To view animal by ID
-- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Tiger", "diet": "Carnivore", "habitat": "Jungle", "funFact": "This animal is a strong swimmer."}' -b cookies.txt http://localhost:3000/api/animals/add` Add a new animal
-- `curl -X PUT -H "Content-Type: application/json" -d '{"diet": "Omnivore"}' -b cookies.txt http://localhost:3000/api/animals/update/:id` To update animal
-- `curl -X DELETE -b cookies.txt http://localhost:3000/api/animals/delete/:id` To delete animal
-- `curl -X GET -b cokies.txt http://localhost:3000/api/animals/diet/Herbivore` To filter animal by diet.
-- `curl -X GET -b cookies.txt http://localhost:3000/api/animals/habitat/forest` To filter animal by habitat.
-- `curl -X GET -b cookies.txt http://localhost:3000/api/animals/game/guess-funfact` To play the Fun Fact guessing game
+This API can be tested using Insomnia or cURL.
+
+### Example cURL Commands
+
+#### Base URL: `https://restful-api-animals.onrender.com`
+
+Create a user:
+
+- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Jo"}' -c cookies.txt https://restful-api-animals.onrender.com/api/users/create`
+
+Login user:
+
+- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Sue"}' -c cookies.txt https://restful-api-animals.onrender.com/api/users/login`
+
+Logout user:
+
+- `curl -X POST -H "Content-Type: application/json" -b cookies.txt -c cookies.txt https://restful-api-animals.onrender.com/api/users/logout`
+
+Get all animals:
+
+- `curl -X GET -b cookies.txt https://restful-api-animals.onrender.com/api/animals/getall`
+
+Get animal bu ID:
+
+- `curl -X GET -b cookies.txt https://restful-api-animals.onrender.com/api/animals/get/:id`
+
+Add new animal:
+
+- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Tiger", "diet": "Carnivore", "habitat": "Jungle", "funFact": "This animal is a strong swimmer."}' -b cookies.txt https://restful-api-animals.onrender.com/api/animals/add`
+
+Update animal:
+
+- `curl -X PUT -H "Content-Type: application/json" -d '{"diet": "Omnivore"}' -b cookies.txt https://restful-api-animals.onrender.com/api/animals/update/:id`
+
+Delete animal:
+
+- `curl -X DELETE -b cookies.txt https://restful-api-animals.onrender.com/api/animals/delete/:id`
+
+Filter animals by diet:
+
+- `curl -X GET -b cokies.txt https://restful-api-animals.onrender.com/api/animals/diet/Herbivore`
+
+Filer animals by habitat:
+
+- `curl -X GET -b cookies.txt https://restful-api-animals.onrender.com/api/animals/habitat/forest`
+
+Play the Fun Fact animal guessing game:
+
+- `curl -X GET -b cookies.txt https://restful-api-animals.onrender.com/api/animals/game/guess-funfact`
+
+#### Local URL: `http://localhost:3000`
+
+Create a user:
+
+- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Jo"}' -c cookies.txt http://localhost:3000/api/users/create`
+
+Login user:
+
+- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Sue"}' -c cookies.txt http://localhost:3000/api/users/login`
+
+Logout user:
+
+- `curl -X POST -H "Content-Type: application/json" -b cookies.txt -c cookies.txt http://localhost:3000/api/users/logout`
+
+Get all animals:
+
+- `curl -X GET -b cookies.txt http://localhost:3000/api/animals/getall`
+
+Get animal by ID:
+
+- `curl -X GET -b cookies.txt http://localhost:3000/api/animals/get/:id`
+
+Add animal:
+
+- `curl -X POST -H "Content-Type: application/json" -d '{"name": "Tiger", "diet": "Carnivore", "habitat": "Jungle", "funFact": "This animal is a strong swimmer."}' -b cookies.txt http://localhost:3000/api/animals/add`
+
+Update animal:
+
+- `curl -X PUT -H "Content-Type: application/json" -d '{"diet": "Omnivore"}' -b cookies.txt http://localhost:3000/api/animals/update/:id`
+
+Delete animal:
+
+- `curl -X DELETE -b cookies.txt http://localhost:3000/api/animals/delete/:id`
+
+Filter animals by diet:
+
+- `curl -X GET -b cokies.txt http://localhost:3000/api/animals/diet/Herbivore`
+
+Filter animals by habitat:
+
+- `curl -X GET -b cookies.txt http://localhost:3000/api/animals/habitat/forest`
+
+Play animal Fun Fact guessing game:
+
+- `curl -X GET -b cookies.txt http://localhost:3000/api/animals/game/guess-funfact`
 
 ## Notes
 
