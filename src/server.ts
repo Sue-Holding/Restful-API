@@ -14,9 +14,11 @@ const app: Express = express();
 const PORT = process.env.PORT || 3000;
 
 // Middlewares
-app.use(cors(
-    {origin: "http://localhost:5173"}
-));
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true
+}));
+
 app.use(express.urlencoded({extended: true}));
 
 app.use(express.json()); // ✅ Middleware to parse JSON body
