@@ -28,7 +28,7 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: false // disable whilst no login function
+  credentials: true // disable whilst no login function
 }));
 
 //body parsers
