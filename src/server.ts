@@ -42,10 +42,9 @@ app.use(session({
     cookie: { 
       secure: isProduction,
       sameSite: isProduction ? 'none' : 'lax',
-      // secure: false  // Set to true if using HTTPS
+      httpOnly: true,
     }, 
-  })
-);
+  }));
 
 // endpoints / routes
 app.get('/', (req: Request, res:Response) => {
