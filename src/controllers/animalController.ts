@@ -171,4 +171,4 @@ export const checkAnimalGuess = async (req: Request, res: Response) => {
   }
 };
 
-module.exports = { getAllAnimals, getAnimalById, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, guessAnimalByFunFact, checkAnimalGuess };
+// module.exports = { getAllAnimals, getAnimalById, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, guessAnimalByFunFact, checkAnimalGuess };
