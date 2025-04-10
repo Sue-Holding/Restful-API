@@ -43,12 +43,17 @@ app.use(express.urlencoded({extended: true}));
 
 app.use(express.json()); // ✅ Middleware to parse JSON body
 
+const isProduction = process.env.NODE_ENV === 'production';
 app.use(
   session({
     secret: process.env.SESSION_SECRET || "fallbackSecret",
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: false }, // Set to true if using HTTPS
+    cookie: { 
+      secure: isProduction,  // must be true in production (HTTPS)
+      sameSite: isProduction ? 'none' : 'lax' // 'none' for cross-origin HTTPS
+      // secure: false  // Set to true if using HTTPS
+    }, 
   })
 );
 
