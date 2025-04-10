@@ -17,19 +17,23 @@ const isProduction = process.env.NODE_ENV === 'production';
 
 // Middlewares
 app.use(cors({
-  origin: (origin, callback) => {
-    const allowedOrigins = [
-      'http://localhost:5173',
-      'https://restful-api-animals.onrender.com'
-    ];
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true // disable whilst no login function
+  origin: ['http://localhost:5173', 'https://restful-api-animals.onrender.com'],
+  credentials: true
 }));
+// app.use(cors({
+//   origin: (origin, callback) => {
+//     const allowedOrigins = [
+//       'http://localhost:5173',
+//       'https://restful-api-animals.onrender.com'
+//     ];
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true // disable whilst no login function
+// }));
 
 //body parsers
 app.use(express.urlencoded({extended: true}));
@@ -41,8 +45,10 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: { 
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'none',
+      secure: isProduction, // true only in production (HTTPS)
+    sameSite: isProduction ? 'none' : 'lax', 
+      // secure: process.env.NODE_ENV === 'production',
+      // sameSite: 'none',
       httpOnly: true,
     }, 
   }));
