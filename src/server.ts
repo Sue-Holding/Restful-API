@@ -5,6 +5,7 @@ import { connectDB } from './database/db';
 import dotenv from 'dotenv';
 import userRoutes from "./routes/userRoutes";
 import animalRoutes from './routes/animalRoutes';
+import { authMiddleware } from './middleware/authMiddleware';
 
 dotenv.config();
 connectDB();
@@ -40,8 +41,8 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
     cookie: { 
-      secure: isProduction,
-      sameSite: isProduction ? 'none' : 'lax',
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'none',
       httpOnly: true,
     }, 
   }));
