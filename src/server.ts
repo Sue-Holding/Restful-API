@@ -5,7 +5,7 @@ import { connectDB } from './database/db';
 import dotenv from 'dotenv';
 import userRoutes from "./routes/userRoutes";
 import animalRoutes from './routes/animalRoutes';
-// import { authMiddleware } from './middleware/authMiddleware';
+import { authMiddleware } from './middleware/authMiddleware';
 
 dotenv.config();
 connectDB();
@@ -28,7 +28,7 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true
+  credentials: false // disable whilst no login function
 }));
 
 //body parsers
@@ -36,16 +36,16 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json()); // ✅ Middleware to parse JSON body
 
 // session middleware
-// app.use(session({
-//     secret: process.env.SESSION_SECRET || "fallbackSecret",
-//     resave: false,
-//     saveUninitialized: false,
-//     cookie: { 
-//       secure: process.env.NODE_ENV === 'production',
-//       sameSite: 'none',
-//       httpOnly: true,
-//     }, 
-//   }));
+app.use(session({
+    secret: process.env.SESSION_SECRET || "fallbackSecret",
+    resave: false,
+    saveUninitialized: false,
+    cookie: { 
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'none',
+      httpOnly: true,
+    }, 
+  }));
 
 // endpoints / routes
 app.get('/', (req: Request, res:Response) => {
