@@ -16,10 +16,6 @@ const PORT = process.env.PORT || 3000;
 // const isProduction = process.env.NODE_ENV === 'production';
 
 // Middlewares
-// app.use(cors({
-//   origin: ['http://localhost:5173', 'https://restful-api-animals.onrender.com'],
-//   credentials: true
-// }));
 app.use(cors({
   origin: (origin, callback) => {
     const allowedOrigins = [
@@ -32,8 +28,13 @@ app.use(cors({
       callback(new Error('Not allowed by CORS'));
     }
   },
-  credentials: true // disable whilst no login function
+  credentials: false, // disable whilst no login function
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+  allowedHeaders: ['Content-Type'],
 }));
+
+// Handle OPTIONS requests (preflight)
+app.options('*', cors());
 
 //body parsers
 app.use(express.urlencoded({extended: true}));
