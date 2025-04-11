@@ -1,11 +1,11 @@
 import express, { Express, Request, Response } from 'express';
-import session from 'express-session';
+// import session from 'express-session';
 import cors from 'cors';
 import { connectDB } from './database/db';
 import dotenv from 'dotenv';
-import userRoutes from "./routes/userRoutes";
+// import userRoutes from "./routes/userRoutes";
 import animalRoutes from './routes/animalRoutes';
-import { authMiddleware } from './middleware/authMiddleware';
+// import { authMiddleware } from './middleware/authMiddleware';
 
 dotenv.config();
 connectDB();
@@ -13,7 +13,7 @@ connectDB();
 // Create the Express app
 const app: Express = express();
 const PORT = process.env.PORT || 3000;
-const isProduction = process.env.NODE_ENV === 'production';
+// const isProduction = process.env.NODE_ENV === 'production';
 
 // Middlewares
 // app.use(cors({
@@ -40,23 +40,23 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json()); // ✅ Middleware to parse JSON body
 
 // session middleware
-app.use(session({
-    secret: process.env.SESSION_SECRET || "fallbackSecret",
-    resave: false,
-    saveUninitialized: false,
-    cookie: { 
-      secure: isProduction, // true only in production (HTTPS)
-      sameSite: isProduction ? 'none' : 'lax', 
-      httpOnly: true,
-    }, 
-  }));
+// app.use(session({
+//     secret: process.env.SESSION_SECRET || "fallbackSecret",
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: { 
+//       secure: isProduction, // true only in production (HTTPS)
+//       sameSite: isProduction ? 'none' : 'lax', 
+//       httpOnly: true,
+//     }, 
+//   }));
 
 // endpoints / routes
 app.get('/', (req: Request, res:Response) => {
     res.send("This is sue's backend application");
 });
 
-app.use("/api/users", userRoutes);
+// app.use("/api/users", userRoutes);
 app.use('/api/animals', animalRoutes);
 
 
