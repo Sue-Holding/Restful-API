@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllAnimals, searchAnimalsByName, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, getAnimalsByLocation guessAnimalByFunFact, checkAnimalGuess, getAnimalById } from "../controllers/animalController";
+import { getAllAnimals, searchAnimalsByName, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, getAnimalsByLocation, guessAnimalByFunFact, checkAnimalGuess, getAnimalById } from "../controllers/animalController";
 // import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = express.Router();
