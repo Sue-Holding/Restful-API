@@ -171,4 +171,29 @@ export const checkAnimalGuess = async (req: Request, res: Response) => {
   }
 };
 
+// Find animals by location
+export const getAnimalsByLocation = async (req: Request, res: Response) => {
+  try {
+    const animals = await Animal.find({ location: req.params.location });
+    res.json(animals);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      res.status(500).json({ message: "Failed to get animals by location", error: err.message });
+    }
+  }
+};
+
+// Find animals by name (case-insensitive partial match)
+export const searchAnimalsByName = async (req: Request, res: Response) => {
+  try {
+    const regex = new RegExp(req.params.name, 'i'); // case-insensitive regex search
+    const animals = await Animal.find({ name: { $regex: regex } });
+    res.json(animals);
+  } catch (err: unknown) {
+    if (err instanceof Error) {
+      res.status(500).json({ message: "Failed to search animals by name", error: err.message });
+    }
+  }
+};
+
 // module.exports = { getAllAnimals, getAnimalById, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, guessAnimalByFunFact, checkAnimalGuess };

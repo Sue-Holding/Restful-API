@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllAnimals, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, guessAnimalByFunFact, checkAnimalGuess, getAnimalById } from "../controllers/animalController";
+import { getAllAnimals, searchAnimalsByName, addAnimal, updateAnimal, deleteAnimal, insertManyAnimals, getAnimalsByDiet, getAnimalsByHabitat, getAnimalsByLocation guessAnimalByFunFact, checkAnimalGuess, getAnimalById } from "../controllers/animalController";
 // import { authMiddleware } from '../middleware/authMiddleware';
 
 const router = express.Router();
@@ -15,5 +15,7 @@ router.get("/diet/:diet", getAnimalsByDiet);
 router.get("/habitat/:habitat", getAnimalsByHabitat);
 router.get("/game/guess-funfact", guessAnimalByFunFact); // Get a random fun fact
 router.post("/game/check-guess", checkAnimalGuess); // Check if the guess is correct
+router.get('/location/:location', getAnimalsByLocation);
+router.get('/search/:name', searchAnimalsByName);
 
 export default router;
