@@ -7,7 +7,7 @@ const animalSchema = new mongoose.Schema({
   },
   
   diet: String,
-  habitat: String,
+  location: String,
   funFact: String,
 });
 
