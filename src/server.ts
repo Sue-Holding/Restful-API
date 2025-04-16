@@ -20,7 +20,8 @@ app.use(cors({
   origin: (origin, callback) => {
     const allowedOrigins = [
       'http://localhost:5173',
-      'https://restful-api-animals.onrender.com'
+      'https://restful-api-animals.onrender.com',
+      'https://amazinganimals.netlify.app'
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
