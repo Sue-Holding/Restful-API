@@ -19,7 +19,8 @@ const PORT = process.env.PORT || 3000;
 app.use(cors({
   origin: (origin, callback) => {
     const allowedOrigins = [
-      'http://localhost:5173',
+      'http://localhost:5173', // vite server
+      'http://localhost:4200', // angular dev server
       'https://restful-api-animals.onrender.com',
       'https://amazinganimals.netlify.app'
     ];
