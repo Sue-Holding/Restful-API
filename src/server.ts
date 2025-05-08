@@ -22,7 +22,8 @@ app.use(cors({
       'http://localhost:5173', // vite server
       'http://localhost:4200', // angular dev server
       'https://restful-api-animals.onrender.com',
-      'https://amazinganimals.netlify.app'
+      'https://amazinganimals.netlify.app', //vanilla ts frontend
+      'https://amazing-animals.netlify.app' //angular frontend
     ];
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
